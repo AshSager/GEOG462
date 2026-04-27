@@ -57,58 +57,75 @@ class SmartRaster(arcpy.Raster):
 
 # Potential smart vector layer
 
-# class SmartVectorLayer:
-#     def __init__(self, feature_class_path):
-#         """Initialize with a path to a vector feature class"""
-#         self.feature_class = feature_class_path
+class SmartVectorLayer:
+    def __init__(self, feature_class_path):
+        """Initialize with a path to a vector feature class"""
+        self.feature_class = feature_class_path
         
-#         # Check if it exists
-#         if not arcpy.Exists(self.feature_class):
-#             raise FileNotFoundError(f"{self.feature_class} does not exist.")
-#     def summarize_field(self, field):
-#         # set up a tracking variable to track if things work
-#         okay = True
+        # Check if it exists
+        if not arcpy.Exists(self.feature_class):
+            raise FileNotFoundError(f"{self.feature_class} does not exist.")
+    def summarize_field(self, field):
+        # set up a tracking variable to track if things work
+        okay = True
 
-#         #check if the field is in the legit list
-#         try: 
-#             existing_fields = [f.name for f in arcpy.ListFields(self.feature_class)]
-#             if field not in existing_fields:
-#                 okay = False
-#                 print(f"The field {field} is not in list of possible fields")
-#                 return False, None
-#         except Exception as e:
-#             print(f"Problem checking the fields: {e}")
+        #check if the field is in the legit list
+        try: 
+            existing_fields = [f.name for f in arcpy.ListFields(self.feature_class)]
+            if field not in existing_fields:
+                okay = False
+                print(f"The field {field} is not in list of possible fields")
+                return False, None
+        except Exception as e:
+            print(f"Problem checking the fields: {e}")
 
-#         # now go through and get the mean value
-#         try: 
-#             with arcpy.da.SearchCursor(self.feature_class, [field]) as cursor:
-#                 vals = [row[0] for row in cursor if row[0] is not None and not math.isnan(row[0])]
-#             mean = sum(vals)/len(vals)
-#             return okay, mean
-#         except Exception as e:
-#             print(f"Problem calculating mean: {e}")
-#             okay = False
-#             return okay, None
+        # now go through and get the mean value
+        try: 
+            with arcpy.da.SearchCursor(self.feature_class, [field]) as cursor:
+                vals = [row[0] for row in cursor if row[0] is not None and not math.isnan(row[0])]
+            mean = sum(vals)/len(vals)
+            return okay, mean
+        except Exception as e:
+            print(f"Problem calculating mean: {e}")
+            okay = False
+            return okay, None
 
     
-#     def zonal_stats_to_field(self, raster_path, statistic_type="MEAN", output_field="ZonalStat"):
-#         """
-#         For each feature in the vector layer, calculates the zonal statistic from the raster
-#         and writes it to a new field.
+    def zonal_stats_to_field(self, raster_path, statistic_type="MEAN", output_field="ZonalStat"):
+        """
+        For each feature in the vector layer, calculates the zonal statistic from the raster
+        and writes it to a new field.
         
-#         Parameters:
-#         - raster_path: path to the raster
-#         - statistic_type: type of statistic ("MEAN", "SUM", etc.)
-#         - output_field: name of the field to create to store results
-#         """
-#         # set up a tracking variable to track if things work
-#         okay = True
+        Parameters:
+        - raster_path: path to the raster
+        - statistic_type: type of statistic ("MEAN", "SUM", etc.)
+        - output_field: name of the field to create to store results
+        """
+        # set up a tracking variable to track if things work
+        okay = True
 
-#         # Add a field to store the zonal stats result.
-#         #  If the field already exists, however, return to the user
-#         #  to let them know that it exists. 
-
-#         #Your code
+        # Add a field to store the zonal stats result.
+        
+        #  If the field already exists, however, return to the user
+        #  to let them know that it exists. 
+        try:
+            existing_fields = [f.name for f in arcpy.ListFields(self.feature_class)]
+            if output_field in existing_fields:
+                okay = False
+                print(f"The field {field} already exists")
+                return False, None
+        except Exception as e:
+            print(f"Problem with finding the fields, and checking: {e}")
+            okay = False
+            return okay, e
+        try:
+            arcpy.management.AddField(self.feature_class, output_field, "DOUBLE")
+        except Exception as e:
+            print(f"problem with adding the field {e}")
+            okay = False
+            return okay, e
+        # LEFT OFF HERE
+        #Your code
 
 
 

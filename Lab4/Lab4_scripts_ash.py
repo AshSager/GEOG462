@@ -23,7 +23,7 @@ import importlib
 #   
 # Set the workspace to point to the geodatabase you are using for this lab
 
-arcpy.env.workspace = r"R:\2026\Spring\GEOG562\Students\sagerz\Lab4\lab4_starter_database.gdb" 
+arcpy.env.workspace = r"R:\2026\Spring\GEOG562\Students\sagerz\Lab4\Lab4_AshSager\Lab4_AshSager.gdb" 
 
 ############################################################################
 # Block 3:  We are going to work with the notion of extending raster objects
@@ -40,7 +40,6 @@ print("reloaded")
 
 r = l4.SmartRaster("Landsat_image_corv")
 print(r.metadata["bounds"])
-print(r.raster_path)
 
 # Question 1
 #  Why do we need to use the "super()" function in the definition of the SmartRaster?
@@ -91,9 +90,10 @@ else:
 #    are relevant -- band 4 and 3.  But we didn't
 #    set them here -- why did it work?
 
-#  Your answer:
+# Your answer:
 
-
+# It worked because we set the variables equal to 4 and 3 in the function file. 
+# So, there's nothing we need to do now. 
 
 
 ##########################################################
