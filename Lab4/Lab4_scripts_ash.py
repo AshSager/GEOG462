@@ -12,7 +12,7 @@ import importlib
 #   4.  Clone the repository to your local computer
 #   5.  Create a new branch for your work
 #   6.  Create a new folder in the repository for this class
-
+#   7.  Fuck around and find out...
 
 # Block 2:  Prep and point to your Arc project for this week
 #   If you have not already, create a new ArcGIS Pro project for this class
