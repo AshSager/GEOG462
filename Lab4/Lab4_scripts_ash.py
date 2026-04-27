@@ -47,8 +47,8 @@ print(r.raster_path)
 
 # Your answer:
 
-
-
+# Super is called on the initialization of raster path, basically setting up
+# everything in the parent class. So, we get all of arcpy.Raster's functionality. 
 
 
 

@@ -32,42 +32,27 @@ class SmartRaster(arcpy.Raster):
         }
 
 
-    # def calculate_ndvi(self,  band4_index = 4, band3_index = 3):
+    def calculate_ndvi(self,  band4_index = 4, band3_index = 3):
 
-    #     """Calculate NDVI using the NIR and Red bands."""
+        """Calculate NDVI using the NIR and Red bands."""
        
-    #     # set up an indicator about whether things work for later
-    #     okay = True
+        # set up an indicator about whether things work for later
+        okay = True
 
-    #     #embed everything in a try/except block
-    #     # First get the bands.  You can use the band numbers to get the bands
-    #     #   from the raster. 
+        #embed everything in a try/except block
+        # First get the bands.  You can use the band numbers to get the bands
+        #   from the raster. 
 
-    #     # Your code:
-
-
-      
-
-
-
-    #     # Now we have the two bands.    
-    #     #   calculate (NIR-Red)/(NIR+red), which is the formula for
-    #     #   NDVI. 
-
-    #     #  Embed in a try/except block, so we can catch any errors that might occur
-
-    #     # Calculate the NDVI, and return an "okay, ndvi" if it worked, 
-    #     #   okay, e as the exception if it didn't.
-
-    #     #your code:
-
-
+        # Your code:
+        try: 
+            nir_band = arcpy.Raster(self.raster_path + f"/Band_{band4_index}")
+            red_band = arcpy.Raster(self.raster_path + f"/Band_{band3_index}")
+            ndvi = (nir_band - red_band) / (nir_band + red_band)
+        except Exception as e:
+            okay = False
+            return okay, e
+        return okay, ndvi
        
-
-
-
-
-
 
 
 # Potential smart vector layer
