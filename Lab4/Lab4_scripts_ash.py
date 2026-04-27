@@ -1,7 +1,7 @@
 import arcpy
 import pandas as pd
 import matplotlib.pyplot as plt
-import Lab4_functions as l4
+import Lab4_functions_ash as l4
 import importlib
 
 
@@ -12,7 +12,7 @@ import importlib
 #   4.  Clone the repository to your local computer
 #   5.  Create a new branch for your work
 #   6.  Create a new folder in the repository for this class
-#   7.  Fuck around and find out...
+
 
 # Block 2:  Prep and point to your Arc project for this week
 #   If you have not already, create a new ArcGIS Pro project for this class
@@ -23,7 +23,7 @@ import importlib
 #   
 # Set the workspace to point to the geodatabase you are using for this lab
 
-arcpy.env.workspace = r"R:\2025\Spring\GEOG562\Instructors\kennedy_2025\Lab4\Lab4_arcproject_REK\Lab4_arcproject_REK.gdb" 
+arcpy.env.workspace = r"R:\2026\Spring\GEOG562\Students\sagerz\Lab4\lab4_starter_database.gdb" 
 
 ############################################################################
 # Block 3:  We are going to work with the notion of extending raster objects
@@ -32,7 +32,7 @@ arcpy.env.workspace = r"R:\2025\Spring\GEOG562\Instructors\kennedy_2025\Lab4\Lab
 
 #    First, reimport the lab4 functions. Remember why we need to do this? 
 importlib.reload(l4)
-
+print("reloaded")
 #  Look at the code in the Lab4_functions.py file for the "SmartRaster"
 #   object.  Note the method "_extract_metadata".  Test it out just to see how
 #  it works.  Point to the Landsat_image_corv raster, and print out the 
@@ -40,7 +40,7 @@ importlib.reload(l4)
 
 r = l4.SmartRaster("Landsat_image_corv")
 print(r.metadata["bounds"])
-
+print(r.raster_path)
 
 # Question 1
 #  Why do we need to use the "super()" function in the definition of the SmartRaster?
